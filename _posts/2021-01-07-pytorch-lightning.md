@@ -187,7 +187,7 @@ if args.checkpoint:
 trainer = pl.Trainer(**trainer_args)
 ```
 
-# Early stopping
+# Early Stopping
 
 &nbsp;&nbsp;&nbsp;&nbsp;모델을 학습할 때 적절한 epoch 수를 정하는 것은 정말 어려운 일입니다. 이를 해결하기 위해 한 가지 간단한 대안으로 early stopping을 사용할 수 있습니다. early stopping은 특정 metric 성능이 연속된 일정 epoch 동안 향상되지 않을 경우 학습을 그만하는 방법입니다. Pytorch lightning에서는 Trainer에 콜백 함수를 추가해서 early stopping을 할 수 있습니다.
 
