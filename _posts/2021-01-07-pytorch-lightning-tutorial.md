@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Pytorch lightning 튜토리얼
-date: 2020-01-07 01:52
+date: 2021-01-07 01:52
 author: choyi0521
-tags: [machine-learning, pytorch, pytorch-lightning]
+tags: [pytorch, pytorch-lightning]
 ---
 
 
@@ -151,7 +151,7 @@ DATALOADER:0 TEST RESULTS
 
 &nbsp;&nbsp;&nbsp;&nbsp;Pytorch lightning은 기본적으로 각 버전마다 체크포인트를 저장해줍니다. 하지만, 체크포인트 이름, 저장 주기, 모니터링할 metric 등을 바꾸고 싶으면 체크포인트 callback을 수정해주어야 합니다. 이번 예제에서는 마지막 체크포인트와 validation에서 구한 정확도 순으로 일정 개수의 체크포인트만 저장하는 방법에 대해 알아봅시다.
 
-&nbsp;&nbsp;&nbsp;&nbsp;먼저, 아래와 같이 ModelCheckpoint로 체크포인트 콜백 함수를 생성합니다. 각 파라미터의 의미는 다음과 같습니다.
+&nbsp;&nbsp;&nbsp;&nbsp;먼저, 아래와 같이 ModelCheckpoint로 체크포인트 콜백을 생성합니다. 각 파라미터의 의미는 다음과 같습니다.
 
 * filepath: 체크포인트 저장위치와 이름 형식을 지정합니다.
 * verbose: 체크포인트 저장 결과를 출력합니다.
@@ -189,9 +189,9 @@ trainer = pl.Trainer(**trainer_args)
 
 # Early Stopping
 
-&nbsp;&nbsp;&nbsp;&nbsp;모델을 학습할 때 적절한 epoch 수를 정하는 것은 정말 어려운 일입니다. 이를 해결하기 위해 한 가지 간단한 대안으로 early stopping을 사용할 수 있습니다. early stopping은 특정 metric 성능이 연속된 일정 epoch 동안 향상되지 않을 경우 학습을 그만하는 방법입니다. Pytorch lightning에서는 Trainer에 콜백 함수를 추가해서 early stopping을 할 수 있습니다.
+&nbsp;&nbsp;&nbsp;&nbsp;모델을 학습할 때 적절한 epoch 수를 정하는 것은 정말 어려운 일입니다. 이를 해결하기 위해 한 가지 간단한 대안으로 early stopping을 사용할 수 있습니다. early stopping은 특정 metric 성능이 연속된 일정 epoch 동안 향상되지 않을 경우 학습을 그만하는 방법입니다. Pytorch lightning에서는 Trainer에 콜백을 추가해서 early stopping을 할 수 있습니다.
 
-&nbsp;&nbsp;&nbsp;&nbsp;EarlyStopping 콜백 함수에서 주로 변경해야 하는 파라미터는 다음과 같습니다.
+&nbsp;&nbsp;&nbsp;&nbsp;EarlyStopping 콜백에서 주로 변경해야 하는 파라미터는 다음과 같습니다.
 
 * monitor: 모니터링할 metric을 지정합니다.
 * patience: metric 성능이 몇 번의 epoch가 향상 되지않을 때 학습을 멈출건지 지정합니다.
@@ -232,7 +232,7 @@ trainer = pl.Trainer(**trainer_args)
 
 &nbsp;&nbsp;&nbsp;&nbsp;Pytorch lightning을 사용하면 분산 학습이나 체크포인트 저장 같은 모델 이외에 구현해야할 부분에 큰 시간을 들이지 않아도 돼서 많이 편리했습니다. 꼭 pytorch lightning을 쓰지 않더라도 코드를 깔끔하게 구현하기 위해 라이브러리가 제시하는 코딩 스타일을 한 번쯤 익혀보는 것도 좋을 것 같습니다.
 
-&nbsp;&nbsp;&nbsp;&nbsp;사용하면서 몇 가지 불편한 점도 있었습니다. 예를 들어, 학습에 여러 optimizer와 scheduler가 필요한 경우 training_step 부분의 코드가 가독성이 떨어지고 분산 학습시 validation을 할 때 파일 출력을 메인 gpu에서 밖에 못 하는 등 몇몇 문제를 발견할 수 있었습니다. 또한, 이 글을 쓰고 있는 시점에도 라이브러리가 버젼이나 OS에 따라 문서에 적힌 것과 다르게 동작하는 것을 확인할 수 있었습니다. 이러한 부분들이 보완되면 대부분의 프로젝트에서 유용하게 쓰일 수 있을 것 같습니다.
+&nbsp;&nbsp;&nbsp;&nbsp;사용하면서 몇 가지 불편한 점도 있었습니다. 예를 들어, 학습에 여러 optimizer와 scheduler가 필요한 경우 training_step 부분의 코드가 가독성이 떨어지고 분산 학습시 validation을 할 때 파일 출력을 메인 gpu에서 밖에 못 하는 등 몇몇 문제를 발견할 수 있었습니다. 또한, 이 글을 쓰고 있는 시점에도 라이브러리가 버젼이나 OS에 따라 문서에 적힌 것과 다르게 동작하거나 구체적으로 설명되지 않은 부분이 있는 것을 확인할 수 있었습니다. 이러한 부분들이 보완되면 대부분의 프로젝트에서 유용하게 쓰일 수 있을 것 같습니다.
 
 
 # 참고문헌
